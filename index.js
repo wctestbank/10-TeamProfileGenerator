@@ -111,7 +111,7 @@ function addIntern() {
             // deconstructs output and creates engineer object to add the employee data
             let { internName, internId, internEmail, internSchool } = internData;
             employeeData.interns.push(new Intern(internName, internId, internEmail, internSchool));
-            console.log(employeeData);
+            //console.log(employeeData);
 
             addTeam();
         });
@@ -138,7 +138,7 @@ function addTeam() {
                 addIntern();
             }
             else {
-                writeToFile(JSON.stringify(employeeData));
+                writeToFile(generatePage(employeeData));
             }
         });
 
@@ -146,7 +146,7 @@ function addTeam() {
 
 // write to html function
 function writeToFile(data) {
-    fs.writeFile(`./dist/TeamProfile.txt`, data, err => {
+    fs.writeFile(`./dist/TeamProfile.html`, data, err => {
         if (err) throw err;
     }
     );

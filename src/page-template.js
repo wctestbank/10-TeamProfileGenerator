@@ -1,20 +1,20 @@
-function generateCard (role, name, id, email, other) {
+function generateCard (role, name, id, email, last) {
     
     let option = '';
 
-    if (role == 'manager'){
-        option = `Github: <a href="https://github.com/${email}"> Github</a>`
+    if (role == 'Manager'){
+        option = `Office: ${last}`;
     }
-    else if (role == 'engineer'){
-
+    else if (role == 'Engineer'){
+        option = `Github: <a href="https://github.com/${last}"> Github</a>`;
     }
-    else if (role == 'intern'){
-
+    else if (role == 'Intern'){
+        option = `School: ${last}`
     }
 
     return `
     <!-- Card Start -->
-    <div class="card" style="width: 18rem;">
+    <div class="card col-3" style="width: 18rem;">
         <div class="card-header bg-primary text-light">
             <h2>${name}</h2>
             <h2>${role}</h2>
@@ -26,7 +26,7 @@ function generateCard (role, name, id, email, other) {
                     Email: <a href="mailto:${email}">${email}</a>
                 </li>
                 <li class="list-group-item">
-                    Github: <a href="https://github.com/${email}"> Github</a>
+                    ${option}
                 </li>
             </ul>
         </div>
@@ -36,6 +36,23 @@ function generateCard (role, name, id, email, other) {
 }
 
 module.exports = templateData => {
+
+    //console.log(templateData);
+
+    let cards = '';
+
+    let {manager, engineers, interns} = templateData;
+
+    // goes through each employee and addes cards
+    cards += generateCard('Manager', manager.name, manager.id, manager.email, manager.officeNumber);
+
+    for (let x = 0; x < engineers.length; x++) {
+        cards += generateCard('Engineer', engineers[x].name, engineers[x].id, engineers[x].email, engineers[x].github);
+    }
+
+    for (let x = 0; x < interns.length; x++) {
+        cards += generateCard('Engineer', interns[x].name, interns[x].id, interns[x].email, interns[x].school);
+    }
 
     return `
     <!DOCTYPE html>
@@ -58,7 +75,7 @@ module.exports = templateData => {
 
     <div class="row">
 
-
+    ${cards}
         
     </div>
 </body>
