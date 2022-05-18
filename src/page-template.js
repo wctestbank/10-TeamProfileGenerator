@@ -6,7 +6,7 @@ function generateCard (role, name, id, email, last) {
         option = `Office: ${last}`;
     }
     else if (role == 'Engineer'){
-        option = `Github: <a href="https://github.com/${last}"> Github</a>`;
+        option = `Github: <a target=\"_blank\" href="https://github.com/${last}">${last}</a>`;
     }
     else if (role == 'Intern'){
         option = `School: ${last}`
@@ -51,7 +51,7 @@ module.exports = templateData => {
     }
 
     for (let x = 0; x < interns.length; x++) {
-        cards += generateCard('Engineer', interns[x].name, interns[x].id, interns[x].email, interns[x].school);
+        cards += generateCard('Intern', interns[x].name, interns[x].id, interns[x].email, interns[x].school);
     }
 
     return `

@@ -139,6 +139,7 @@ function addTeam() {
             }
             else {
                 writeToFile(generatePage(employeeData));
+                console.log("HTML Team Profile generated")
             }
         });
 
