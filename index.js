@@ -1,4 +1,6 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
+const generatePage = require('./src/page-template');
 
 // classes
 const Employee = require('./lib/Employee');
@@ -8,7 +10,8 @@ const Manager = require('./lib/Manager');
 
 let employeeData = {
     manager: {},
-    employees: []
+    engineers: [],
+    interns: []
 };
 
 function startApp() {
@@ -73,7 +76,7 @@ function addEngineer() {
         .then(engiData => {
             // deconstructs output and creates engineer object to add the employee data
             let { engiName, engiId, engiEmail, engiGithub } = engiData;
-            employeeData.employees.push(new Engineer(engiName, engiId, engiEmail, engiGithub));
+            employeeData.engineers.push(new Engineer(engiName, engiId, engiEmail, engiGithub));
 
             addTeam();
             
@@ -107,7 +110,7 @@ function addIntern() {
         .then(internData => {
             // deconstructs output and creates engineer object to add the employee data
             let { internName, internId, internEmail, internSchool } = internData;
-            employeeData.employees.push(new Intern(internName, internId, internEmail, internSchool));
+            employeeData.interns.push(new Intern(internName, internId, internEmail, internSchool));
             console.log(employeeData);
 
             addTeam();
@@ -134,10 +137,20 @@ function addTeam() {
             else if (choice == 'intern'){
                 addIntern();
             }
+            else {
+                writeToFile(JSON.stringify(employeeData));
+            }
         });
 
 }
 
+// write to html function
+function writeToFile(data) {
+    fs.writeFile(`./dist/TeamProfile.txt`, data, err => {
+        if (err) throw err;
+    }
+    );
+}
 
 //console.log(employeeData);
 startApp();
