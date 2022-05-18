@@ -47,4 +47,4 @@ THEN I exit the application, and the HTML is generated
 
 Included in dist folder 
 
-[Sample README](./dist/TeamProfile.html)
+[Sample HTML](./dist/TeamProfile.html)
