@@ -38,6 +38,7 @@ THEN I exit the application, and the HTML is generated
 
 ## Walkthrough
 
+https://watch.screencastify.com/v/4CAb4opLaFJxOcpdHT0M
 
 ## Screenshot
 
